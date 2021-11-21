@@ -17,11 +17,16 @@ SocksPort 0.0.0.0:9050
 Controlport 9051
 CookieAuthentication 1
 
-# Run as a relay only (change policy to enable exit node)
-ExitPolicy reject *:*        # no exits allowed
+# No exits allowed
+ExitPolicy reject *:*
 ExitPolicy reject6 *:*
-ExitRelay 0
 IPv6Exit 0
+
+# Run as a relay and bridge
+ExitRelay 0
+BridgeRelay 1
+ServerTransportPlugin     obfs4 exec /usr/bin/obfs4proxy
+ServerTransportListenAddr obfs4 0.0.0.0:8024
 
 # Set some limits
 
@@ -32,7 +37,9 @@ IPv6Exit 0
 #AccountingStart day 00:00
 
 # Limits the average incoming and outgoing bandwidth
-RelayBandwidthRate 768 KB   # Throttle traffic to
+# Throttle traffic to
+
+RelayBandwidthRate 768 KB   
 
 # Limit the maximum token bucket size (also known as the burst) 
 RelayBandwidthBurst 1024 KB

@@ -1,8 +1,35 @@
 # Docker Tor-Relay
-An Docker image of a Tor-Relay based on the latest stable-slim Debian image.
 
-You can build it by [Dockerfile](https://github.com/FoRTu/docker-tor-relay/blob/master/Dockerfile) or just download from Docker Hub [https://hub.docker.com/r/fortu/tor-relay](https://hub.docker.com/r/fortu/tor-relay).
+Docker image based on the latest stable-slim Debian image to run a Tor relay.
 
-I created it for being used on [unRAID](https://unraid.net/) systems, but you know, Docker can be run on any GNU/Linux.
+You can build the image by the [Dockerfile](https://github.com/FoRTu/docker-tor-relay/blob/master/Dockerfile) or just download it from Docker Hub:
 
-Here you are a [torrc](https://github.com/FoRTu/docker-tor-relay/blob/master/torrc) configuration file for the Tor-Relay. You can be used as a template as it is fully functional.
+* [https://hub.docker.com/r/fortu/tor-relay](https://hub.docker.com/r/fortu/tor-relay)
+
+In this repository you will find a template of the requested [`torrc`](https://github.com/FoRTu/docker-tor-relay/blob/master/torrc) configuration file to run `tor`. You can use it as a template or just use as it is. Because is totally functional, but I recommend to customize to make it unique and yours.
+
+## How to create a container from this image
+
+Easy, just run the command below by changing the `torrc` configuration file path:
+
+```bash
+docker run --name='tor-relay' \
+-p '9001:9001/tcp' \
+-p '9030:9030/tcp' \
+-p '9050:9050/tcp' \
+-p '8024:8024/tcp' \
+-v '[PATH OF torrc FILE]':'/etc/tor/':'rw' \
+'fortu/tor-relay'
+```
+
+The launcher inside the container will check if the required `torrc` file exist. This file is necessary to run `tor`. If it doesn't, a template will be download from this git repository. The template itself is totally functional, so in case of run the container for the first time or the `torrc` file doesn't exist because has been deleted, it will be downloaded automatically.
+
+I highly recommend to customize the `torrc` file with you info to make it unique.
+
+Be aware that if you are behind a NAT or Firewall you have to open this  TCP ports:
+
+* 9091/TCP
+* 9030/TCP
+* 8024/TCP
+
+Let's make Internet more anonymous!
