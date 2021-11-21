@@ -1,6 +1,6 @@
 # Docker Tor-Relay
 
-Docker image based on the latest stable-slim Debian image to run a Tor relay.
+Docker image based on the latest stable-slim Debian image to run Tor as a `relay` and `bridge`.
 
 You can build the image by the [Dockerfile](https://github.com/FoRTu/docker-tor-relay/blob/master/Dockerfile) or just download it from Docker Hub:
 
