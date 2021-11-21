@@ -1,19 +1,20 @@
 # See https://www.torproject.org/docs/tor-manual.html.en
 
-# Run Tor as a regular user (do not change this)
-User debian-tor
+# Default folder where tor generate required files (don't change it)
 DataDirectory /var/lib/tor
 
+# Your public IP address. Tor will discover it bur if you have DDNS domain
+# put it
+#Address XXXX.duckdns.org OR static IP
+
 # Port to advertise for incoming Tor connections.
-ORPort 9001
+ORPort 9001 IPv4Only
+ExtORPort
 
-# Mirror directory information for others (optional, not used on bridge)
-DirPort 9030
+# Define a port to use as a entry point of the tor network
+SocksPort 9050
 
-# Define the port to use the relay as a entry point for Tor
-SocksPort 0.0.0.0:9050
-
-# Set a port on the relay from it will be controlled by apps like Nyx
+# Set a control port to be used by external apps like Nyx
 Controlport 9051
 CookieAuthentication 1
 
@@ -30,7 +31,7 @@ ServerTransportListenAddr obfs4 0.0.0.0:8024
 
 # Set some limits
 
-# Limits the max number of bytes sent and received 
+# Limits the max number of bytes sent and received
 #AccountingMax  100GB
 
 # Specify how long accounting periods last
@@ -39,9 +40,9 @@ ServerTransportListenAddr obfs4 0.0.0.0:8024
 # Limits the average incoming and outgoing bandwidth
 # Throttle traffic to
 
-RelayBandwidthRate 768 KB   
+RelayBandwidthRate 768 KB
 
-# Limit the maximum token bucket size (also known as the burst) 
+# Limit the maximum token bucket size (also known as the burst)
 RelayBandwidthBurst 1024 KB
 
 # Set maximun memory usage

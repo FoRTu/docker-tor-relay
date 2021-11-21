@@ -10,7 +10,7 @@ In this repository you will find a template of the requested [`torrc`](https://g
 
 ## How to create a container from this image
 
-Easy, just run the command below by changing the `torrc` configuration file path:
+Easy, just run the command below by changing the `torrc` configuration file path and the folder where all tor generated files will be save. This folder is very important because the `fingerprint`, the ID of your relay, will be stored there. This is files are needed to restore your relay after a tor software update or if you want to move the relay to another computer.
 
 ```bash
 docker run --name='tor-relay' \
@@ -19,6 +19,7 @@ docker run --name='tor-relay' \
 -p '9050:9050/tcp' \
 -p '8024:8024/tcp' \
 -v '[PATH OF torrc FILE]':'/etc/tor/':'rw' \
+-v '[DATA DIRECTORY]':'/var/lib/tor':'rw' \
 'fortu/tor-relay'
 ```
 
